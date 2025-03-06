@@ -1,0 +1,161 @@
+.tasweer{
+border-radius:30%;
+width: 10%;
+
+
+}
+.tasweer:hover{
+    transform:scale(1.09);
+    transition: 1s ease;
+
+}
+.name{
+    font-style:inherit;
+    font-weight: bold;
+    
+        border: 2px solid rgb(206, 197, 194);
+        border-radius: 5px;
+        display:inline-block;
+        width: 200px;
+        height: 50px;
+        padding: 10px;
+        
+        box-shadow: 10px 10px;
+    
+    
+    
+    
+}
+.name:hover{
+    background-color: aqua;
+    transform: scale(1.04);
+    transition: 1s ease;
+    .contact{
+    border: 2px solid rgb(206, 197, 194);
+    border-radius: 5px;
+    display:inline-block;
+}
+    
+    
+}
+.intro{
+    border: 2px solid rgb(194, 212, 89);
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    display:inline-block;
+    position: relative;
+    width: 200px;
+    height: 110px;
+    padding: 10px;
+    
+    box-shadow: 10px 10px;
+    
+}
+.intro:hover{
+    background-color: rgb(250, 253, 31);
+    transform: scale(1.07);
+    transition: 1s ease;
+    display:inline-block;
+    position: relative;
+    
+}
+
+
+.about{
+    font-style: inherit;
+    font-weight: bold;
+    
+        border: 2px solid rgb(206, 197, 194);
+        border-radius: 5px;
+        display:inline;
+    
+    
+}
+
+.about:hover{
+    background-color: aquamarine;
+    transform: scale(1.012);
+    transition: 1s ease;
+    
+    
+    
+    
+    
+}
+.rung{
+    background-color: gainsboro;
+}
+.contact{
+    border: 2px solid rgb(206, 197, 194);
+    border-radius: 5px;
+    display:inline-block;
+    
+}
+.contact:hover{
+    background-color: aquamarine;
+    transform: scale(1.012);
+    transition: 1s ease;
+    
+    display:inline-block;
+    
+    
+}
+.contactborder{
+   
+    
+    
+    border: 2px solid rgb(194, 212, 89);
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    display:inline-block;
+    width: 190px;
+    height: 35px;
+    padding: 10px;
+    
+    box-shadow: 10px 10px;
+    
+}
+.contactborder:hover{
+    background-color: rgb(250, 253, 31);
+    transform: scale(1.07);
+    transition: 1s ease;
+    
+    
+    
+    
+    
+}
+.taleem{
+    border: 2px solid rgb(206, 197, 194);
+        border-radius: 5px;
+        display:inline;
+
+}
+.taleem:hover{
+    background-color: aquamarine;
+    transform: scale(1.012);
+    transition: 1s ease;
+
+}
+.taleemihistory{
+    border: 2px solid rgb(194, 212, 89);
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    display:inline-block;
+    width: 200px;
+    height: 170px;
+    padding: 10px;
+    
+    box-shadow: 10px 10px;
+    
+    
+}
+.taleemihistory:hover{
+    background-color: rgb(250, 253, 31);
+    transform: scale(1.07);
+    transition: 1s ease;
+    display:inline-block;
+    position: relative;
+    
+
+}
