@@ -1,0 +1,35 @@
+<div style="max-width: 900px; margin: 50px auto; padding: 20px; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); background-color: #fff;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">My Orders</h2>
+
+    <% if (orders && orders.length > 0) { %>
+        <div style="display: flex; flex-direction: column; gap: 25px;">
+            <% orders.forEach(function(order) { %>
+                <div style="border: 1px solid #dcdcdc; border-radius: 8px; padding: 20px; background-color: #fcfcfc;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                        <h3 style="margin: 0; color: #007bff;">Order ID: <%= order.orderId %></h3>
+                        <span style="font-size: 0.9em; color: #777;">Date: <%= new Date(order.orderDate).toLocaleDateString() %></span>
+                    </div>
+
+                    <p style="margin-bottom: 10px; font-weight: bold; color: #555;">Items:</p>
+                    <ul style="list-style: none; padding: 0; margin: 0 0 15px 0;">
+                        <% order.items.forEach(function(item) { %>
+                            <li style="display: flex; justify-content: space-between; font-size: 0.95em; color: #666; margin-bottom: 5px;">
+                                <span><%= item.name %> (x<%= item.quantity %>)</span>
+                                <span>$<%= (item.price * item.quantity).toFixed(2) %></span>
+                            </li>
+                        <% }); %>
+                    </ul>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; font-size: 1.1em; font-weight: bold;">
+                        <span>Total:</span>
+                        <span>$<%= order.totalPrice %></span>
+                    </div>
+                    <p style="text-align: right; margin-top: 10px; color: #28a745; font-weight: bold;">Status: <%= order.status %></p>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <p style="text-align: center; color: #777; font-size: 1.1em;">You have no orders yet.</p>
+        <p style="text-align: center; margin-top: 15px;"><a href="/product" style="color: #007bff; text-decoration: none;">Start Shopping</a></p>
+    <% } %>
+</div>
