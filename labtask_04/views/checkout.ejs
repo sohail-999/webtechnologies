@@ -1,0 +1,62 @@
+<div style="max-width: 900px; margin: 50px auto; padding: 20px; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); background-color: #fff;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Proceed to Checkout</h2>
+
+    <% if (errorMessage) { %>
+        <p style="color: red; text-align: center; margin-bottom: 15px;"><%= errorMessage %></p>
+    <% } %>
+
+    <% if (!cart || cart.length === 0) { %>
+        <p style="text-align: center; color: #777; font-size: 1.1em;">Your cart is empty. Please add items to proceed to checkout.</p>
+        <p style="text-align: center; margin-top: 15px;"><a href="/product" style="color: #007bff; text-decoration: none;">Continue Shopping</a></p>
+    <% } else { %>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <!-- Cart Summary Section -->
+            <div>
+                <h3 style="color: #555; margin-bottom: 15px;">Order Summary</h3>
+                <div style="border: 1px solid #f0f0f0; border-radius: 5px; padding: 15px; background-color: #fcfcfc;">
+                    <% cart.forEach(function(item) { %>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #eee;">
+                            <span style="font-weight: bold; color: #333;"><%= item.name %> (x<%= item.quantity %>)</span>
+                            <span style="color: #007bff; font-weight: bold;">$<%= (item.price * item.quantity).toFixed(2) %></span>
+                        </div>
+                    <% }); %>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 1.2em; font-weight: bold; color: #333;">
+                        <span>Total:</span>
+                        <span>$<%= cartTotal %></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Details Form Section -->
+            <div>
+                <h3 style="color: #555; margin-bottom: 15px;">Shipping Information</h3>
+                <form action="/checkout" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div>
+                        <label for="full_name" style="display: block; margin-bottom: 5px; font-weight: bold;">Full Name:</label>
+                        <input type="text" id="full_name" name="full_name" value="<%= userDetails.name %>" required
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email:</label>
+                        <input type="email" id="email" name="email" value="<%= userDetails.email %>" required
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label for="phone" style="display: block; margin-bottom: 5px; font-weight: bold;">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" value="<%= userDetails.phone %>" required
+                               style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label for="address" style="display: block; margin-bottom: 5px; font-weight: bold;">Shipping Address:</label>
+                        <textarea id="address" name="address" rows="4" required
+                                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; resize: vertical;"><%= userDetails.address %></textarea>
+                    </div>
+                    <button type="submit"
+                            style="background-color: #28a745; color: white; padding: 15px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; margin-top: 15px;">
+                        Pay Later with Cash
+                    </button>
+                </form>
+            </div>
+        </div>
+    <% } %>
+</div>

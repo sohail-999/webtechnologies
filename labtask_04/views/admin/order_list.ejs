@@ -1,0 +1,126 @@
+<style>
+    /* New styles for order status - you can move these to your public/css/style.css */
+    .status-completed {
+        color: #28a745; /* Green for completed */
+        font-weight: bold;
+    }
+    .status-pending {
+        color: #ffc107; /* Amber/Yellow for pending */
+        font-weight: bold;
+    }
+    .status-other {
+        color: #6c757d; /* Grey for other statuses */
+        font-weight: bold;
+    }
+
+    /* Basic table styling for readability */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #e9ecef;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .action-button {
+        padding: 6px 12px;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .action-button.edit {
+        background-color: #007bff;
+    }
+    .action-button.delete {
+        background-color: #dc3545;
+    }
+    .action-button.complete {
+        background-color: #007bff; /* Blue for complete action */
+    }
+</style>
+
+<div style="max-width: 1200px; margin: 50px auto; padding: 25px; border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background-color: #fcfcfc;">
+    <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Manage All Orders</h2>
+
+    <% // Display Flash Messages %>
+    <% if (successMessage && successMessage.length > 0) { %>
+        <div style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; padding: 10px; margin-bottom: 20px; text-align: center;">
+            <%= successMessage %>
+        </div>
+    <% } %>
+    <% if (errorMessage && errorMessage.length > 0) { %>
+        <div style="background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px; padding: 10px; margin-bottom: 20px; text-align: center;">
+            <%= errorMessage %>
+        </div>
+    <% } %>
+
+    <% if (orders && orders.length > 0) { %>
+        <div style="max-height: 700px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th style="text-align: right;">Total Price</th>
+                        <th style="text-align: center;">Order Date</th>
+                        <th style="text-align: center;">Status</th>
+                        <th style="text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach(function(order) { %>
+                        <tr>
+                            <td><%= order.orderId %></td>
+                            <td>
+                                <strong><%= order.userName %></strong><br>
+                                <small><%= order.userEmail %></small><br>
+                                <small><%= order.userPhone %></small><br>
+                                <small><%= order.userAddress %></small>
+                            </td>
+                            <td>
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <% order.items.forEach(function(item) { %>
+                                        <li style="font-size: 0.9em;"><%= item.name %> (x<%= item.quantity %>) - $<%= (item.price * item.quantity).toFixed(2) %></li>
+                                    <% }); %>
+                                </ul>
+                            </td>
+                            <td style="text-align: right; font-weight: bold;">$<%= order.totalPrice %></td>
+                            <td style="text-align: center;"><%= new Date(order.orderDate).toLocaleDateString() %></td>
+                            <td class="status-<%= (order.status === 'Completed' || order.status.toLowerCase() === 'completed') ? 'completed' : 'pending' %>">
+                                <%= order.status %>
+                            </td>
+                            <td style="text-align: center;">
+                                <% if (order.status !== 'Completed' && order.status.toLowerCase() !== 'completed') { %>
+                                    <form action="/admin/orders/complete/<%= order._id %>" method="POST" style="display: inline-block;" onsubmit="return confirm('Mark order <%= order.orderId %> as Completed?');">
+                                        <button type="submit" class="action-button complete">
+                                            Mark as Completed
+                                        </button>
+                                    </form>
+                                <% } else { %>
+                                    <span style="color: #6c757d; font-size: 0.9em;">No action</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <p style="text-align: center; color: #777; font-size: 1.1em;">No orders have been placed yet.</p>
+    <% } %>
+</div>
