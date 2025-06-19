@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your style.css in public/css -->
+    <style>
+        /* Add some basic styles for auth links and cart count */
+        .header-icons-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto; /* Pushes these elements to the right */
+            padding-right: 10px;
+        }
+        .auth-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .auth-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+        .auth-links span {
+            font-weight: normal;
+            color: #555;
+        }
+        .cart-icon-container {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .cart-count {
+            background-color: #ff4500; /* Orange-red badge */
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 0.7em;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            min-width: 15px;
+            text-align: center;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="topheader">
+        <div class="search">
+            <input type="text" placeholder="Search">
+            <button>
+                <img src="/images/search-svgrepo-com.svg" alt="Search" width="16" height="16">
+            </button>
+        </div>
+        <div class="logo">
+            JOULES
+        </div>
+        <!-- Right side container for all icons/auth links -->
+        <div class="header-icons-right">
+            <div class="icon">
+                <img src="/images/location-2950(2).svg" alt="Location" width="20" height="20">
+                <img src="/images/heart.svg" alt="Heart" width="20" height="20">
+                <img src="/images/account-svgrepo-com.svg" alt="Person" width="20" height="20">
+                <!-- Cart Icon with Count - NOW A LINK -->
+                <a href="/cart" class="cart-icon-container">
+                    <img src="/images/BAG.svg" alt="Bag" width="20" height="20">
+                    <% if (cartItemCount > 0) { %>
+                        <span class="cart-count"><%= cartItemCount %></span>
+                    <% } %>
+                </a>
+            </div>
+            <!-- Authentication Links -->
+            <div class="auth-links">
+                <% if (user) { %>
+                    <span>Welcome, <%= user.username %>!</span>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="/">HOME</a>
+        <a href="/product">PRODUCTS</a>
+        <a href="/about">ABOUT</a>
+        <a href="#">BOYS</a>
+        <a href="#">OUTERWEAR</a>
+        <a href="#">GIRLS</a>
+        <a href="#">GIFTS</a>
+        <a href="#">OUTLET</a>
+        <a href="#">JOURNAL</a>
+    </div>
+
+    <!-- The moving-container and its images (as per best practice, only on index.ejs) -->
+    <!-- This section is where the main content of individual pages will be injected -->
+    <main>
+        <%- body %>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+          <p>Our Social Networks</p>
+          <img src="/images/social1.svg" alt="Facebook">
+          <img src="/images/social2.svg" alt="Twitter">
+          <img src="/images/social3.svg" alt="Instagram">
+        </div>
+        <p>Contact us</p>
+        <div class="contactoptions">
+            <div class="contactoption">
+                <img src="/images/phone.png" alt="Phone Icon">
+                <h3>Call Us</h3>
+                <p>0305-473444-3</p>
+            </div>
+            <div class="contactoption">
+                <img src="/images/email.png" alt="Email Icon">
+                <h3>Email Us</h3>
+                <p>sohail20338@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
