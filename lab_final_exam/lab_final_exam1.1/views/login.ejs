@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-center text-primary mb-4">Admin Login</h2>
+                <form action="/login" method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" required autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+                <p class="text-center mt-3 text-muted">Default Admin: **Username:** admin | **Password:** password123</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

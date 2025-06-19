@@ -1,0 +1,61 @@
+<%- include('../../partials/header') %>
+
+<div class="card shadow-sm p-4">
+    <h1 class="mb-4 text-center text-secondary">Add New Vehicle</h1>
+
+    <form action="/admin/vehicles" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Vehicle Name</label>
+            <input type="text" class="form-control <%= typeof missingFields !== 'undefined' && missingFields.name ? 'is-invalid' : '' %>" id="name" name="name" value="<%= typeof vehicle !== 'undefined' ? vehicle.name : '' %>" required>
+            <% if (typeof missingFields !== 'undefined' && missingFields.name) { %>
+                <div class="invalid-feedback">Vehicle name is required.</div>
+            <% } %>
+        </div>
+        <div class="mb-3">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" class="form-control <%= typeof missingFields !== 'undefined' && missingFields.brand ? 'is-invalid' : '' %>" id="brand" name="brand" value="<%= typeof vehicle !== 'undefined' ? vehicle.brand : '' %>" required>
+            <% if (typeof missingFields !== 'undefined' && missingFields.brand) { %>
+                <div class="invalid-feedback">Brand is required.</div>
+            <% } %>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control <%= typeof missingFields !== 'undefined' && (missingFields.price || invalidPrice) ? 'is-invalid' : '' %>" id="price" name="price" value="<%= typeof vehicle !== 'undefined' ? vehicle.price : '' %>" min="0" step="0.01" required>
+            <% if (typeof missingFields !== 'undefined' && missingFields.price) { %>
+                <div class="invalid-feedback">Price is required.</div>
+            <% } else if (typeof invalidPrice !== 'undefined' && invalidPrice) { %>
+                <div class="invalid-feedback">Price must be a valid non-negative number.</div>
+            <% } %>
+        </div>
+        <div class="mb-3">
+            <label for="type" class="form-label">Type</label>
+            <select class="form-select <%= typeof missingFields !== 'undefined' && missingFields.type ? 'is-invalid' : '' %>" id="type" name="type" required>
+                <option value="">Select Type</option>
+                <option value="sedan" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'sedan') ? 'selected' : '' %>>Sedan</option>
+                <option value="SUV" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'SUV') ? 'selected' : '' %>>SUV</option>
+                <option value="truck" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'truck') ? 'selected' : '' %>>Truck</option>
+                <option value="sports" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'sports') ? 'selected' : '' %>>Sports Car</option>
+                <option value="hatchback" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'hatchback') ? 'selected' : '' %>>Hatchback</option>
+                <option value="van" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'van') ? 'selected' : '' %>>Van</option>
+                <option value="electric" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'electric') ? 'selected' : '' %>>Electric</option>
+                <option value="hybrid" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'hybrid') ? 'selected' : '' %>>Hybrid</option>
+                <option value="motorcycle" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'motorcycle') ? 'selected' : '' %>>Motorcycle</option>
+                <option value="other" <%= (typeof vehicle !== 'undefined' && vehicle.type === 'other') ? 'selected' : '' %>>Other</option>
+            </select>
+            <% if (typeof missingFields !== 'undefined' && missingFields.type) { %>
+                <div class="invalid-feedback">Vehicle type is required.</div>
+            <% } %>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Vehicle Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            <div class="form-text">Accepted formats: JPEG, JPG, PNG, GIF. Max size: 5MB.</div>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/admin/vehicles" class="btn btn-secondary me-md-2">Cancel</a>
+            <button type="submit" class="btn btn-primary">Add Vehicle</button>
+        </div>
+    </form>
+</div>
+
+<%- include('../../partials/footer') %>
